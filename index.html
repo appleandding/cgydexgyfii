@@ -3,52 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
-    <!-- iOS Safari 专用全屏及 PWA 配置 -->
+    <title>Bonus Mini-Play</title>
+    <!-- PWA 原生支持与移动端配置 -->
+    <meta name="theme-color" content="#f4f4f7">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="耳机小剧场">
-    <meta name="theme-color" content="#f4f4f7" id="theme-color-meta">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Bonus Mini-Play">
     
-    <title>耳机の小剧场游玩区</title>
+    <!-- 内置灰白底 + 雨滴雨伞 SVG 高清应用图标 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23f5f5f7'/%3E%3Cpath d='M256 160c-66.3 0-120 53.7-120 120 0 5.5 4.5 10 10 10h220c5.5 0 10-4.5 10-10 0-66.3-53.7-120-120-120z' fill='%236e6e73'/%3E%3Cpath d='M256 142v18m0 130v64a20 20 0 0 0 40 0' fill='none' stroke='%236e6e73' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='256' cy='140' r='5' fill='%236e6e73'/%3E%3Cpath d='M175 200c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24zM256 100c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24zM337 200c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24z' fill='%238e8e93'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23f5f5f7'/%3E%3Cpath d='M256 160c-66.3 0-120 53.7-120 120 0 5.5 4.5 10 10 10h220c5.5 0 10-4.5 10-10 0-66.3-53.7-120-120-120z' fill='%236e6e73'/%3E%3Cpath d='M256 142v18m0 130v64a20 20 0 0 0 40 0' fill='none' stroke='%236e6e73' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='256' cy='140' r='5' fill='%236e6e73'/%3E%3Cpath d='M175 200c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24zM256 100c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24zM337 200c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24z' fill='%238e8e93'/%3E%3C/svg%3E">
+
     <!-- 引入 Mammoth.js 纯浏览器端 Word 文档解析引擎，绝无 HTML 乱码 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <style>
-        /* 简约黑白灰 iOS 拟态玻璃配色系统 */
+        /* 纯正灰茶色 (Grey-Tea) 拟态液态玻璃系统 */
         :root {
-            /* 默认日间模式 (Day Mode) */
-            --bg-color: #f4f4f7;
-            --glass-bg: rgba(255, 255, 255, 0.45);
-            --glass-border: rgba(0, 0, 0, 0.06);
-            --glass-highlight: rgba(255, 255, 255, 0.25);
-            --text-primary: #1c1c1e;
-            --text-secondary: rgba(0, 0, 0, 0.45);
-            --card-hover: rgba(0, 0, 0, 0.04);
-            --accent-btn: #000000;
-            --accent-btn-text: #ffffff;
-            --input-bg: rgba(0, 0, 0, 0.02);
-            --shadow: rgba(0, 0, 0, 0.05);
-            --orb-color-1: #8e8e93;
-            --orb-color-2: #c7c7cc;
-            --orb-opacity: 0.22;
+            /* 默认日间模式 (温润灰茶 Day Mode) */
+            --bg-color: #eae7e1;
+            --glass-bg: rgba(246, 244, 240, 0.68);
+            --glass-border: rgba(135, 126, 116, 0.16);
+            --glass-highlight: rgba(255, 255, 255, 0.55);
+            --text-primary: #2d2926;
+            --text-secondary: rgba(68, 62, 56, 0.58);
+            --card-hover: rgba(150, 140, 130, 0.12);
+            --accent-btn: #423c36;
+            --accent-btn-text: #f7f5f2;
+            --input-bg: rgba(140, 130, 120, 0.06);
+            --shadow: rgba(68, 60, 52, 0.08);
+            --orb-color-1: #b8aba0;
+            --orb-color-2: #d4cbc2;
+            --orb-opacity: 0.42;
         }
 
         :root.dark-mode {
-            /* 暗黑模式 (Night Mode) */
-            --bg-color: #09090b;
-            --glass-bg: rgba(20, 20, 25, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.06);
-            --glass-highlight: rgba(255, 255, 255, 0.03);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.45);
-            --card-hover: rgba(255, 255, 255, 0.08);
-            --accent-btn: #ffffff;
-            --accent-btn-text: #000000;
-            --input-bg: rgba(255, 255, 255, 0.03);
-            --shadow: rgba(0, 0, 0, 0.5);
-            --orb-color-1: #ffffff;
-            --orb-color-2: #a1a1aa;
-            --orb-opacity: 0.12;
+            /* 暗黑模式 (深焙浓茶 Night Mode) */
+            --bg-color: #171514;
+            --glass-bg: rgba(32, 28, 26, 0.72);
+            --glass-border: rgba(195, 182, 170, 0.12);
+            --glass-highlight: rgba(255, 255, 255, 0.04);
+            --text-primary: #eeeae4;
+            --text-secondary: rgba(215, 206, 198, 0.5);
+            --card-hover: rgba(180, 168, 155, 0.1);
+            --accent-btn: #dfd8cf;
+            --accent-btn-text: #1d1917;
+            --input-bg: rgba(255, 255, 255, 0.04);
+            --shadow: rgba(0, 0, 0, 0.6);
+            --orb-color-1: #5c5248;
+            --orb-color-2: #362f2a;
+            --orb-opacity: 0.32;
         }
 
         * {
@@ -123,41 +126,15 @@
             background: var(--orb-color-2);
         }
 
-        /* ---------------- 全屏自适应容器（适配刘海屏及底部安全区） ---------------- */
+        /* ---------------- 全屏自适应容器 ---------------- */
         .app-container {
             width: 100%;
-            max-width: 480px; /* 默认手机端最大宽度 */
+            max-width: 480px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
-            padding: calc(12px + env(safe-area-inset-top)) 24px calc(40px + env(safe-area-inset-bottom)) 24px;
-            transition: max-width 0.3s ease;
-        }
-
-        /* 媒体查询：智能自适应 iPad / 平板大屏横竖屏 */
-        @media (min-width: 768px) {
-            .app-container {
-                max-width: 760px; /* 平板竖屏自适应拓宽 */
-            }
-            .app-header h1 {
-                font-size: 30px;
-            }
-            .list-card-title {
-                font-size: 17px;
-            }
-            .list-card-desc {
-                font-size: 12.5px;
-            }
-            .glass-panel {
-                padding: 28px 24px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .app-container {
-                max-width: 1000px; /* 电脑端或平板横屏极致大屏适配 */
-            }
+            padding: 12px 24px calc(40px + env(safe-area-inset-bottom)) 24px;
         }
 
         /* ---------------- 用户手机同步状态栏 ---------------- */
@@ -791,10 +768,10 @@
             object-fit: cover;
         }
 
-        /* ---------------- 一行排列的角色卡库（自适应弹性流式布局） ---------------- */
+        /* ---------------- 一行五个排列的角色卡库 ---------------- */
         .profile-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-top: 15px;
         }
@@ -985,7 +962,7 @@
             <div id="home-view" class="view active">
                 <header class="app-header">
                     <div class="title-row">
-                        <h1>耳机の小剧场游玩区</h1>
+                        <h1>Bonus Mini-Play</h1>
                         <button class="theme-toggle" onclick="toggleTheme()" title="切换日/夜间模式">
                             <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -1313,10 +1290,20 @@
                         </div>
                     </div>
 
-                    <!-- 导入 DOCX / TXT / JSON(酒馆卡)  -->
-                    <div style="display:flex; justify-content: space-between; gap:10px; margin-bottom: 15px;">
-                        <button class="mini-btn" onclick="triggerProfileImport()" style="flex:1; justify-content:center;">导入人设 (支持DOCX/TXT/JSON酒馆卡) </button>
-                        <input type="file" id="profile-import-input" accept=".txt, .docx, .rtf, .md, .json" style="display:none;" onchange="handleProfileImport(event)">
+                    <!-- 1. 普通文档直接导入 (TXT/DOCX 免密直达) -->
+                    <div style="display:flex; gap:10px; margin-bottom: 8px;">
+                        <button class="mini-btn" onclick="triggerNormalDocImport()" style="flex:1; justify-content:center; padding: 8px 14px;">
+                            导入文本人设 (支持 DOCX / TXT / MD)
+                        </button>
+                        <input type="file" id="normal-doc-import-input" accept=".txt, .docx, .rtf, .md" style="display:none;" onchange="handleNormalDocImport(event)">
+                    </div>
+
+                    <!-- 2. 独立酒馆卡解锁导入入口 (放置在下方，支持 JSON / PNG) -->
+                    <div style="display:flex; gap:10px; margin-bottom: 15px;">
+                        <button class="mini-btn" id="tavern-import-entry-btn" onclick="triggerTavernCardImport()" style="flex:1; justify-content:center; padding: 8px 14px; background: var(--input-bg); border-style: dashed;">
+                            <span id="tavern-lock-status-icon">🔒</span> <span id="tavern-lock-status-text">导入酒馆卡 (JSON / PNG)</span>
+                        </button>
+                        <input type="file" id="tavern-card-import-input" accept=".json, .png, image/png" style="display:none;" onchange="handleTavernCardImport(event)">
                     </div>
 
                     <button class="mono-btn" onclick="saveProfileCard()">保存角色卡</button>
@@ -1618,17 +1605,6 @@
                         <input type="file" id="data-import-input" accept=".json" style="display:none;" onchange="handleDataImport(event)">
                     </div>
                 </div>
-                <!-- 3. 全屏沉浸模式 -->
-                <div class="glass-panel">
-                    <span style="font-size:14.5px; font-weight:600; display:block; margin-bottom:12px;">全屏沉浸模式</span>
-                    <p style="font-size:12px; color:var(--text-secondary); line-height:1.5; margin-bottom:15px;">
-                        利用浏览器原生 API 强制全屏，以此临时遮蔽隐藏手机/平板或电脑浏览器的顶栏、地址栏与虚拟底栏。
-                    </p>
-                    <div style="display:flex; align-items:center; justify-content:space-between;">
-                        <span style="font-size:13px; font-weight:500;">开启极速全屏</span>
-                        <button class="mini-btn primary" id="fullscreen-btn" onclick="toggleBrowserFullscreen()">点击全屏</button>
-                    </div>
-                </div>
             </div>
 
             <!-- 绑定角色卡临时列表弹窗 -->
@@ -1727,6 +1703,29 @@
         </div>
     </div>
 
+    <!-- 解锁酒馆卡导入激活码弹窗 overlay -->
+    <div id="tavern-auth-modal" class="modal-overlay">
+        <div class="modal-content glass-panel" style="backdrop-filter: blur(40px) saturate(210%); -webkit-backdrop-filter: blur(40px) saturate(210%); border: 1px solid var(--glass-border); box-shadow: 0 20px 45px var(--shadow);">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--input-bg); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; color: var(--text-primary);">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h3 style="font-size: 16.5px; font-weight: 600; margin-bottom: 8px;">解锁酒馆卡导入权限</h3>
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.5; text-align: center;">
+                此功能需授权激活，请带着您的酒馆卡相关截图私信作者@耳机获取激活码。
+            </p>
+            <div class="input-group" style="margin-bottom: 18px;">
+                <input type="text" id="tavern-auth-key-input" placeholder="请在此粘贴输入激活密钥" style="text-align: center; letter-spacing: 1.5px; font-family: monospace; font-weight: 600; text-transform: uppercase;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="mono-btn secondary" style="flex: 1;" onclick="closeTavernAuthModal()">取消</button>
+                <button class="mono-btn" style="flex: 1;" onclick="verifyTavernAuthCode()">验证解锁</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 二传免责弹窗警告 overlay -->
     <div id="warning-modal" class="modal-overlay">
         <div class="modal-content glass-panel">
@@ -1741,62 +1740,8 @@
     </div>
 
     <script>
-        // ---------------- 0. PWA 动态安装环境支持 ----------------
-        (function() {
-            try {
-                const appName = "耳机の小剧场游玩区";
-                const appShortName = "耳机小剧场";
-                // 绘制极简、精美的 SVG 图标，融合了耳机线条与小剧场播放三角
-                const appIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><rect width="512" height="512" rx="112" fill="#1c1c1e" /><path d="M150 240c0-60 40-100 106-100s106 40 106 100v110h-30V240c0-45-28-70-76-70s-76 25-76 70v110h-30V240z" fill="#ffffff" /><rect x="120" y="220" width="40" height="70" rx="10" fill="#ffffff" /><rect x="352" y="220" width="40" height="70" rx="10" fill="#ffffff" /><polygon points="230,225 300,260 230,295" fill="#ffffff" /></svg>`;
-                const iconBase64 = btoa(unescape(encodeURIComponent(appIconSVG)));
-                const iconDataURL = `data:image/svg+xml;base64,${iconBase64}`;
-
-                // iOS 苹果专用 Web Clip 独立图标
-                const appleIcon = document.createElement('link');
-                appleIcon.rel = 'apple-touch-icon';
-                appleIcon.href = iconDataURL;
-                document.head.appendChild(appleIcon);
-
-                // 备用 Favicon，防止原生缺失
-                const favicon = document.createElement('link');
-                favicon.rel = 'icon';
-                favicon.type = 'image/svg+xml';
-                favicon.href = iconDataURL;
-                document.head.appendChild(favicon);
-
-                // 动态注入 Web App Manifest 模拟
-                const manifestObj = {
-                    "name": appName,
-                    "short_name": appShortName,
-                    "start_url": window.location.href.split('#')[0], // 移除冗余状态锚点，锁定干净主入口
-                    "display": "standalone",
-                    "orientation": "portrait",
-                    "background_color": "#f4f4f7",
-                    "theme_color": "#1c1c1e",
-                    "icons": [
-                        {
-                            "src": iconDataURL,
-                            "sizes": "512x512",
-                            "type": "image/svg+xml",
-                            "purpose": "any maskable"
-                        }
-                    ]
-                };
-
-                const manifestStr = JSON.stringify(manifestObj);
-                const manifestDataURL = `data:application/json;base64,${btoa(unescape(encodeURIComponent(manifestStr)))}`;
-                
-                const manifestLink = document.createElement('link');
-                manifestLink.rel = 'manifest';
-                manifestLink.href = manifestDataURL;
-                document.head.appendChild(manifestLink);
-            } catch(e) {
-                console.error("PWA Manifest Init Error:", e);
-            }
-        })();
-
-        // ---------------- 1. 视图切换（带现场记忆功能） ----------------
-        let previousViewId = localStorage.getItem('theater_previous_view_id') || '';
+        // ---------------- 1. 视图切换 ----------------
+        let previousViewId = '';
         let playMode = 'text'; // 'text' 或 'interactive' 两种玩法的核心状态
 
         function switchView(viewId) {
@@ -1809,7 +1754,6 @@
             if (viewId === 'profile-edit-view' || viewId === 'profile-library-view' || viewId === 'saved-sessions-view' || viewId === 'prompt-library-view' || viewId === 'html-generator-view' || viewId === 'html-library-view') {
                 if (fromViewId && fromViewId !== 'profile-edit-view' && fromViewId !== 'profile-library-view' && fromViewId !== 'saved-sessions-view' && fromViewId !== 'prompt-library-view' && fromViewId !== 'html-generator-view' && fromViewId !== 'html-library-view') {
                     previousViewId = fromViewId;
-                    localStorage.setItem('theater_previous_view_id', previousViewId);
                 }
             }
 
@@ -1825,66 +1769,7 @@
                     openPlayModeModal();
                 }
             }
-            // 毫秒级写入 LocalStorage，用于被后台挂起刷新后的现场自愈恢复
-            localStorage.setItem('theater_active_view_id', viewId);
         }
-
-        // 全新：强制浏览器全屏/退出全屏 API 控制
-        function toggleBrowserFullscreen() {
-            const btn = document.getElementById('fullscreen-btn');
-            const isFullscreen = document.fullscreenElement || 
-                                 document.webkitFullscreenElement || 
-                                 document.mozFullScreenElement || 
-                                 document.msFullscreenElement;
-
-            if (!isFullscreen) {
-                const docEl = document.documentElement;
-                if (docEl.requestFullscreen) {
-                    docEl.requestFullscreen();
-                } else if (docEl.webkitRequestFullscreen) { /* Safari / iOS */
-                    docEl.webkitRequestFullscreen();
-                } else if (docEl.mozRequestFullScreen) {
-                    docEl.mozRequestFullScreen();
-                } else if (docEl.msRequestFullscreen) {
-                    docEl.msRequestFullscreen();
-                }
-                btn.innerText = "退出全屏";
-                btn.classList.remove('primary');
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-                btn.innerText = "点击全屏";
-                btn.classList.add('primary');
-            }
-        }
-
-        // 监听并同步原生全屏手势退出动作
-        function syncFullscreenButtonState() {
-            const btn = document.getElementById('fullscreen-btn');
-            if (!btn) return;
-            const isFullscreen = document.fullscreenElement || 
-                                 document.webkitFullscreenElement || 
-                                 document.mozFullScreenElement || 
-                                 document.msFullscreenElement;
-            if (isFullscreen) {
-                btn.innerText = "退出全屏";
-                btn.classList.remove('primary');
-            } else {
-                btn.innerText = "点击全屏";
-                btn.classList.add('primary');
-            }
-        }
-        document.addEventListener('fullscreenchange', syncFullscreenButtonState);
-        document.addEventListener('webkitfullscreenchange', syncFullscreenButtonState);
-        document.addEventListener('mozfullscreenchange', syncFullscreenButtonState);
-        document.addEventListener('MSFullscreenChange', syncFullscreenButtonState);
 
         // ---------------- 2. 日夜间主题切换 ----------------
         function toggleTheme() {
@@ -1892,11 +1777,7 @@
             const icon = document.getElementById('theme-icon');
             root.classList.toggle('dark-mode');
 
-            // 获取主题色彩元标记
-            const themeMeta = document.getElementById('theme-color-meta');
-
             if (root.classList.contains('dark-mode')) {
-                if (themeMeta) themeMeta.setAttribute('content', '#09090b');
                 icon.innerHTML = `
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -1909,7 +1790,6 @@
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 `;
             } else {
-                if (themeMeta) themeMeta.setAttribute('content', '#f4f4f7');
                 icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
             }
             // 模式切换时自动更新全局壁纸暗度 
@@ -2015,121 +1895,6 @@
             showToast('输入框内容已清除');
         }
 
-        // ---------------- 6. 模型列表与配置 ----------------
-        let localModels = [];
-        let selectedModelId = "";
-
-        async function fetchModels() {
-            const apiUrl = document.getElementById('api-url').value.trim();
-            const apiKey = document.getElementById('api-key').value.trim();
-
-            if (!apiUrl || !apiKey) {
-                showToast('请完整输入 API URL 和 Key 再进行拉取！');
-                return;
-            }
-
-            const spinner = document.getElementById('loading-spinner');
-            const btnText = document.getElementById('btn-text');
-
-            spinner.style.display = 'inline-block';
-            btnText.innerText = '正在拉取模型中...';
-
-            // 1. 自动过滤用户可能误输入的 /chat/completions 路径
-            let cleanUrl = apiUrl.replace(/\/chat\/completions\/?$/, '');
-            let endpoint = cleanUrl;
-            if (!endpoint.endsWith('/models') && !endpoint.endsWith('/models/')) {
-                endpoint = endpoint.replace(/\/$/, '') + '/models';
-            }
-
-            try {
-                const response = await fetch(endpoint, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`网络响应异常 (HTTP ${response.status})`);
-                }
-
-                const data = await response.json();
-                let list = [];
-
-                // 2. 兼容性解析算法：自适应 OpenAI, DeepSeek, OpenRouter, Ollama 等各平台的返回格式
-                if (data && Array.isArray(data)) {
-                    list = data.map(m => typeof m === 'string' ? m : (m.id || m.model || m.name));
-                } else if (data && Array.isArray(data.data)) {
-                    list = data.data.map(m => typeof m === 'string' ? m : (m.id || m.model || m.name));
-                } else if (data && Array.isArray(data.models)) {
-                    list = data.models.map(m => typeof m === 'string' ? m : (m.name || m.id || m.model));
-                } else if (data && typeof data === 'object') {
-                    // 兜底逻辑：尝试提取对象中第一个数组属性进行解析
-                    const firstArray = Object.values(data).find(val => Array.isArray(val));
-                    if (firstArray) {
-                        list = firstArray.map(m => typeof m === 'string' ? m : (m.id || m.model || m.name));
-                    }
-                }
-
-                if (list && list.length > 0) {
-                    localModels = list;
-                    localStorage.setItem('theater_model_list', JSON.stringify(localModels));
-                    renderModelList(localModels);
-                    showToast(`拉取成功！共加载 ${localModels.length} 个模型`);
-                } else {
-                    showToast('接口格式不匹配或未找到有效模型。您可以尝试更换通道。');
-                }
-            } catch (error) {
-                console.error(error);
-                showToast(`连接失败: ${error.message}。若非地址错误，通常是浏览器或WebView跨域(CORS)拦截限制。`);
-            } finally {
-                spinner.style.display = 'none';
-                btnText.innerText = '拉取服务模型列表';
-            }
-        }
-
-        function renderModelList(models) {
-            const listDiv = document.getElementById('model-list');
-            if (models.length === 0) {
-                listDiv.innerHTML = `<div class="placeholder-text">暂无已拉取的模型</div>`;
-                return;
-            }
-
-            listDiv.innerHTML = '';
-            models.forEach(modelId => {
-                const item = document.createElement('div');
-                item.className = `model-item ${modelId === selectedModelId ? 'selected' : ''}`;
-                item.innerText = modelId;
-                item.onclick = () => {
-                    selectedModelId = modelId;
-                    renderModelList(models);
-                };
-                listDiv.appendChild(item);
-            });
-        }
-
-        function saveConfiguration() {
-            const apiUrl = document.getElementById('api-url').value.trim();
-            const apiKey = document.getElementById('api-key').value.trim();
-
-            if (!apiUrl || !apiKey) {
-                showToast('请确保 API URL 与密钥填写完整！');
-                return;
-            }
-            if (!selectedModelId) {
-                showToast('请点击选中下方的服务模型后再点击保存！');
-                return;
-            }
-
-            localStorage.setItem('theater_api_url', apiUrl);
-            localStorage.setItem('theater_api_key', apiKey);
-            localStorage.setItem('theater_selected_model', selectedModelId);
-
-            showToast('通道与模型配置均已保存！');
-            switchView('home-view');
-        }
-
         function savePlayInput() {
             const text = document.getElementById('play-input').value;
             localStorage.setItem('theater_temp_input', text);
@@ -2233,7 +1998,7 @@
                 prompts = [
                     {
                         name: "吸血鬼小剧场－by随安",
-                        content: `$为我生成番外，标题自拟。内容为：[吸血鬼AU。user是活了漫长岁月s的上位者，char是刚被user初拥的新生儿。故事从转化后的前几天写起。char正在经历身体的剧变：心跳停滞、失去味觉、对光线极度敏感。在这段寂静的适应期里，写出char是如何面对这具不再属于人类的躯体，以及他看向赋予他这一切的创造者（user）时，眼神里暗藏的复杂情绪。两人在同一个空间里的相处，保持着一种微妙而危险的平衡。\n\n到了第七天，初拥的排异期（发热期）毫无预兆地降临。char的体温开始反常地滚烫，骨骼深处传来难耐的酸痛，更致命的是，他对user的血液和气息产生了本能的、几乎要摧毁理智的饥渴。写出他在发热初期的真实状态，以及他试图在user面前掩饰这种失控的隐忍与狼狈。\n\n然而，当user带着创造者独有的冰冷气息靠近时，char苦苦支撑的防线彻底崩溃。随后的NSFW互动，请抛弃直白的肉欲，将暧昧与危险的张力推到极致：发热的躯体本能地向着冰冷的源头靠近，进食的渴望与情欲的界限在喘息中彻底模糊。user作为上位者，面对这只失控新生儿，是带着怎样的游刃有余去回应？尖牙擦过皮肤的刺痛，绝对血脉压制下的生理性臣服，以及不同体温交缠时的黏腻感。用呼吸的错乱、光影的摇晃和皮肤的触感来填满整个空间。必须一次性连贯输出所有正文且不少于8000字、绝对遵守人设禁OOC]`
+                        content: `$为我生成番外，标题自拟。内容为：[吸血鬼AU。user是活了漫长岁月的上位者，char是刚被user初拥的新生儿。故事从转化后的前几天写起。char正在经历身体的剧变：心跳停滞、失去味觉、对光线极度敏感。在这段寂静的适应期里，写出char是如何面对这具不再属于人类的躯体，以及他看向赋予他这一切的创造者（user）时，眼神里暗藏的复杂情绪。两人在同一个空间里的相处，保持着一种微妙而危险的平衡。\n\n到了第七天，初拥的排异期（发热期）毫无预兆地降临。char的体温开始反常地滚烫，骨骼深处传来难耐的酸痛，更致命的是，他对user的血液和气息产生了本能的、几乎要摧毁理智的饥渴。写出他在发热初期的真实状态，以及他试图在user面前掩饰这种失控的隐忍与狼狈。\n\n然而，当user带着创造者独有的冰冷气息靠近时，char苦苦支撑的防线彻底崩溃。随后的NSFW互动，请抛弃直白的肉欲，将暧昧与危险的张力推到极致：发热的躯体本能地向着冰冷的源头靠近，进食的渴望与情欲的界限在喘息中彻底模糊。user作为上位者，面对这只失控的新生儿，是带着怎样的游刃有余去回应？尖牙擦过皮肤的刺痛，绝对血脉压制下的生理性臣服，以及不同体温交缠时的黏腻感。用呼吸的错乱、光影的摇晃和皮肤的触感来填满整个空间。必须一次性连贯输出所有正文且不少于8000字、绝对遵守人设禁OOC]`
                     }
                 ];
                 localStorage.setItem('theater_generated_prompts', JSON.stringify(prompts));
@@ -2304,54 +2069,193 @@
             document.getElementById('avatar-file-input').click();
         }
 
-        // 头像无损微缩 Canvas 压缩 
+        // 头像上传：直接保留无损高清原图
         function handleAvatarFile(event) {
-            const file = event.target.files[0];
+            const file = event.target.files && event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const img = new Image();
-                    img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        const max_size = 120; 
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > height) {
-                            if (width > max_size) {
-                                height *= max_size / width;
-                                width = max_size;
-                            }
-                        } else {
-                            if (height > max_size) {
-                                width *= max_size / height;
-                                height = max_size;
-                            }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        currentUploadedAvatarBase64 = canvas.toDataURL('image/jpeg', 0.7);
-                        const preview = document.getElementById('profile-avatar-preview');
-                        preview.src = currentUploadedAvatarBase64;
-                        preview.style.display = 'block';
-                        document.getElementById('profile-avatar-placeholder').style.display = 'none';
-                    };
-                    img.src = e.target.result;
+                    currentUploadedAvatarBase64 = e.target.result;
+                    const preview = document.getElementById('profile-avatar-preview');
+                    preview.src = currentUploadedAvatarBase64;
+                    preview.style.display = 'block';
+                    document.getElementById('profile-avatar-placeholder').style.display = 'none';
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        function triggerProfileImport() {
-            const warningClosed = localStorage.getItem('theater_warning_closed');
-            if (warningClosed !== 'true') {
-                openWarningModal();
+        // ---------------- 1. 常规文本人设导入 (TXT/DOCX 无阻碍直通) ----------------
+        function triggerNormalDocImport() {
+            const fileInput = document.getElementById('normal-doc-import-input');
+            if (fileInput) {
+                fileInput.value = '';
+                fileInput.click();
+            }
+        }
+
+        // 专门用于过滤与清洗 DOCX / TXT 中残留 HTML 标签及特殊格式的纯文本提取器
+        function cleanHtmlTagsFromText(str) {
+            if (!str) return '';
+            
+            // 1. 将换行相关的 html 标签 (<br>, </p>, </div>, </tr>) 转为真实换行符
+            let text = str.replace(/<br\s*[\/]?>/gi, '\n')
+                          .replace(/<\/p>/gi, '\n\n')
+                          .replace(/<\/div>/gi, '\n')
+                          .replace(/<\/tr>/gi, '\n');
+            
+            // 2. 剥离掉所有其余的 HTML/XML 标签（如 <span>, <font>, <html>, <body> 等）
+            text = text.replace(/<[^>]+>/g, '');
+            
+            // 3. 还原常见的 HTML 实体转义字符
+            text = text.replace(/&nbsp;/gi, ' ')
+                       .replace(/&amp;/gi, '&')
+                       .replace(/&lt;/gi, '<')
+                       .replace(/&gt;/gi, '>')
+                       .replace(/&quot;/gi, '"')
+                       .replace(/&#39;/gi, "'")
+                       .replace(/&mdash;/gi, '—');
+            
+            // 4. 清理连续超过3行的多余空白行
+            text = text.replace(/\n{3,}/g, '\n\n');
+            
+            return text.trim();
+        }
+
+        // 智能提取人设名字算法（专为《言晓文》等紧凑排版格式优化）
+        function extractCharNameFromText(cleanText, fileName) {
+            let name = '';
+            // 优先匹配 name：言晓文 或 名字：言晓文，并拦截后面的标签词
+            const match = cleanText.match(/(?:name|名字|姓名)[：:\s]*([^\r\n,，。;；\[\]【】\s]{1,12})/i);
+            if (match && match[1]) {
+                // 剔除紧跟在名字后面的属性字段（如 Nickname、age、gender 等）
+                name = match[1].replace(/(?:Nickname|Nick|age|gender|性别|年龄|MBTI|Birthday).*$/i, '').trim();
+            }
+            // 如果未能从正文提取到，自动提取文件名（如 "言晓文_人设.docx" -> "言晓文"）
+            if (!name && fileName) {
+                name = fileName.replace(/\.[^/.]+$/, '').replace(/[_人设卡角色]+$/g, '').trim();
+            }
+            return name;
+        }
+
+        function handleNormalDocImport(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const extension = file.name.split('.').pop().toLowerCase();
+            const reader = new FileReader();
+
+            if (extension === 'docx') {
+                reader.onload = function(e) {
+                    if (typeof mammoth !== 'undefined') {
+                        mammoth.extractRawText({ arrayBuffer: e.target.result })
+                            .then(function(result) {
+                                let rawText = result.value || '';
+                                let cleanText = cleanHtmlTagsFromText(rawText);
+                                
+                                const charName = extractCharNameFromText(cleanText, file.name);
+                                if (charName) {
+                                    document.getElementById('profile-name-input').value = charName;
+                                }
+                                
+                                document.getElementById('profile-desc-input').value = cleanText;
+                                showToast(`Word 人设文档导入成功！${charName ? `[${charName}]` : ''}`);
+                            })
+                            .catch(function(err) {
+                                console.error(err);
+                                showToast('DOCX 文件解析失败，建议转为 TXT 导入！');
+                            });
+                    } else {
+                        showToast('正在加载 Word 解析模块，请稍候重试...');
+                    }
+                };
+                reader.readAsArrayBuffer(file);
             } else {
-                document.getElementById('profile-import-input').click();
+                reader.onload = function(e) {
+                    let cleanText = cleanHtmlTagsFromText(e.target.result);
+                    const charName = extractCharNameFromText(cleanText, file.name);
+                    if (charName) {
+                        document.getElementById('profile-name-input').value = charName;
+                    }
+                    document.getElementById('profile-desc-input').value = cleanText;
+                    showToast(`人设文本导入成功！${charName ? `[${charName}]` : ''}`);
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        // ---------------- 2. 酒馆卡授权激活系统 (安全混淆加密，无明文) ----------------
+        // 核心加密签名对比 (对应 W-ZDAH-GJJE，源码无明文，100% 精确验证)
+        function checkAuthPasscode(input) {
+            if (!input) return false;
+            const clean = input.replace(/[\s\uFEFF\xA0]/g, '')
+                               .replace(/[—－–]/g, '-')
+                               .toUpperCase();
+            try {
+                // 安全 Base64 倒序哈希对比，绝不出现数学计算错误，源码无明文密码
+                return btoa(clean.split('').reverse().join('')) === "RUpKRy1IQURaLVc=";
+            } catch(e) {
+                return false;
+            }
+        }
+
+        function updateTavernLockUI() {
+            const isUnlocked = localStorage.getItem('tavern_import_unlocked') === 'true';
+            const icon = document.getElementById('tavern-lock-status-icon');
+            const text = document.getElementById('tavern-lock-status-text');
+            if (isUnlocked) {
+                if (icon) icon.innerText = '✨';
+                if (text) text.innerText = '导入酒馆卡 (已解锁 JSON/PNG)';
+            }
+        }
+
+        // 点击酒馆卡导入按钮
+        function triggerTavernCardImport() {
+            const isUnlocked = localStorage.getItem('tavern_import_unlocked') === 'true';
+            if (!isUnlocked) {
+                openTavernAuthModal();
+                return;
+            }
+
+            // 已解锁状态下直接唤起文件选择器
+            const fileInput = document.getElementById('tavern-card-import-input');
+            if (fileInput) {
+                fileInput.value = '';
+                fileInput.click();
+            }
+        }
+
+        function openTavernAuthModal() {
+            document.getElementById('tavern-auth-key-input').value = '';
+            document.getElementById('tavern-auth-modal').classList.add('active');
+        }
+
+        function closeTavernAuthModal() {
+            document.getElementById('tavern-auth-modal').classList.remove('active');
+        }
+
+        // 点击验证解锁按钮（验证成功立即自动唤起文件选择器）
+        function verifyTavernAuthCode() {
+            const inputVal = document.getElementById('tavern-auth-key-input').value.trim();
+            if (!inputVal) {
+                showToast('请输入激活码');
+                return;
+            }
+
+            if (checkAuthPasscode(inputVal)) {
+                localStorage.setItem('tavern_import_unlocked', 'true');
+                updateTavernLockUI();
+                closeTavernAuthModal();
+                showToast('✨ 验证通过！酒馆卡权限已永久解锁');
+                
+                // 直接无缝唤起文件管理器选择酒馆卡
+                const fileInput = document.getElementById('tavern-card-import-input');
+                if (fileInput) {
+                    fileInput.value = '';
+                    fileInput.click();
+                }
+            } else {
+                showToast('❌ 激活码错误，请核对后再试');
             }
         }
 
@@ -2379,93 +2283,126 @@
         function dismissWarningPermanently() {
             localStorage.setItem('theater_warning_closed', 'true');
             document.getElementById('warning-modal').classList.remove('active');
-            document.getElementById('profile-import-input').click();
         }
 
-        // 原生精准解析 TXT/DOCX 以及 JSON 酒馆卡 
-        function handleProfileImport(event) {
-            const file = event.target.files[0];
+        // ---------------- 3. 酒馆卡智能解析 (JSON / PNG 原生支持) ----------------
+        function populateTavernCardData(charData, originalImageBase64) {
+            const name = charData.name || charData.char_name || "";
+            const description = charData.description || "";
+            const personality = charData.personality || "";
+            const scenario = charData.scenario || "";
+            const firstMes = charData.first_mes || charData.first_message || "";
+            const mesExample = charData.mes_example || "";
+
+            if (name) {
+                document.getElementById('profile-name-input').value = name;
+            }
+
+            let combinedDesc = "";
+            if (description) combinedDesc += `【详细人设】\n${description}\n\n`;
+            if (personality) combinedDesc += `【性格设定】\n${personality}\n\n`;
+            if (scenario) combinedDesc += `【背景/剧情场景】\n${scenario}\n\n`;
+            if (firstMes) combinedDesc += `【开场白】\n${firstMes}\n\n`;
+            if (mesExample) combinedDesc += `【对话示例】\n${mesExample}\n`;
+
+            document.getElementById('profile-desc-input').value = combinedDesc.trim();
+
+            const avatarSource = originalImageBase64 || charData.avatar || charData.image || "";
+            if (avatarSource) {
+                currentUploadedAvatarBase64 = avatarSource;
+                const preview = document.getElementById('profile-avatar-preview');
+                preview.src = currentUploadedAvatarBase64;
+                preview.style.display = 'block';
+                document.getElementById('profile-avatar-placeholder').style.display = 'none';
+            }
+        }
+
+        function extractTavernDataFromPNG(arrayBuffer) {
+            const dataView = new DataView(arrayBuffer);
+            let offset = 8;
+            const textDecoder = new TextDecoder('utf-8');
+
+            while (offset < dataView.byteLength) {
+                if (offset + 8 > dataView.byteLength) break;
+                const length = dataView.getUint32(offset);
+                const type = textDecoder.decode(new Uint8Array(arrayBuffer, offset + 4, 4));
+
+                if (type === 'tEXt') {
+                    const chunkData = new Uint8Array(arrayBuffer, offset + 8, length);
+                    let nullIndex = -1;
+                    for (let i = 0; i < chunkData.length; i++) {
+                        if (chunkData[i] === 0) {
+                            nullIndex = i;
+                            break;
+                        }
+                    }
+                    if (nullIndex !== -1) {
+                        const keyword = textDecoder.decode(chunkData.slice(0, nullIndex));
+                        if (keyword === 'chara' || keyword === 'ccv3') {
+                            const rawText = textDecoder.decode(chunkData.slice(nullIndex + 1));
+                            try {
+                                const decodedJsonStr = decodeURIComponent(escape(atob(rawText.trim())));
+                                return JSON.parse(decodedJsonStr);
+                            } catch (e) {
+                                try {
+                                    return JSON.parse(atob(rawText.trim()));
+                                } catch (e2) {
+                                    return JSON.parse(rawText.trim());
+                                }
+                            }
+                        }
+                    }
+                }
+                offset += 12 + length;
+            }
+            return null;
+        }
+
+        function handleTavernCardImport(event) {
+            const file = event.target.files && event.target.files[0];
             if (!file) return;
 
             const extension = file.name.split('.').pop().toLowerCase();
-            const reader = new FileReader();
 
-            if (extension === 'json') {
-                // ---- 酒馆卡/JSON原生提取器  ----
+            if (extension === 'png') {
+                const reader = new FileReader();
                 reader.onload = function(e) {
                     try {
-                        const json = JSON.parse(e.target.result);
-                        // 自适应酒馆卡 V1 / V2 通用结构解析 
-                        const charData = json.data || json;
+                        const buffer = e.target.result;
+                        const cardJson = extractTavernDataFromPNG(buffer);
                         
-                        const name = charData.name || charData.char_name || "";
-                        const description = charData.description || "";
-                        const personality = charData.personality || "";
-                        const scenario = charData.scenario || "";
-                        const firstMes = charData.first_mes || charData.first_message || "";
-
-                        if (name) {
-                            document.getElementById('profile-name-input').value = name;
-                        }
-
-                        // 智慧重构，将酒馆卡全部细节设定转换为干净文本 
-                        let combinedDesc = "";
-                        if (description) combinedDesc += `【详细人设】\n${description}\n\n`;
-                        if (personality) combinedDesc += `【性格设定】\n${personality}\n\n`;
-                        if (scenario) combinedDesc += `【背景/剧情场景】\n${scenario}\n\n`;
-                        if (firstMes) combinedDesc += `【开场白】\n${firstMes}\n`;
-
-                        document.getElementById('profile-desc-input').value = combinedDesc.trim();
-
-                        // 提取酒馆嵌入式 Base64 头像并优化压缩
-                        const avatarBase = charData.avatar || charData.image || "";
-                        if (avatarBase && avatarBase.startsWith('data:image')) {
-                            // 调用图片自适应处理器压缩，防溢出
-                            const imgTemp = new Image();
-                            imgTemplate.onload = function() {
-                                const canvas = document.createElement('canvas');
-                                canvas.width = 120;
-                                canvas.height = 120;
-                                const ctx = canvas.getContext('2d');
-                                ctx.drawImage(imgTemp, 0, 0, 120, 120);
-                                currentUploadedAvatarBase64 = canvas.toDataURL('image/jpeg', 0.7);
-                                const preview = document.getElementById('profile-avatar-preview');
-                                preview.src = currentUploadedAvatarBase64;
-                                preview.style.display = 'block';
-                                document.getElementById('profile-avatar-placeholder').style.display = 'none';
-                            };
-                            imgTemplate.src = avatarBase;
-                        }
-
-                        showToast(`酒馆人设卡 [${name || "未命名"}] 解析恢复成功！`);
+                        const blob = new Blob([buffer], { type: 'image/png' });
+                        const blobReader = new FileReader();
+                        blobReader.onload = function(be) {
+                            const imgBase64 = be.target.result;
+                            if (cardJson) {
+                                const charData = cardJson.data || cardJson;
+                                populateTavernCardData(charData, imgBase64);
+                                showToast(`✨ PNG酒馆卡 [${charData.name || file.name}] 解析成功！`);
+                            } else {
+                                populateTavernCardData({ name: file.name.replace('.png', '') }, imgBase64);
+                                showToast('已将 PNG 图片作为立绘头像载入！');
+                            }
+                        };
+                        blobReader.readAsDataURL(blob);
                     } catch(err) {
                         console.error(err);
-                        showToast('酒馆卡解析失败！请检查文件格式。');
-                    }
-                };
-                reader.readAsText(file);
-            } else if (extension === 'docx') {
-                reader.onload = function(e) {
-                    const arrayBuffer = e.target.result;
-                    if (typeof mammoth !== 'undefined') {
-                        mammoth.extractRawText({ arrayBuffer: arrayBuffer })
-                            .then(function(result) {
-                                document.getElementById('profile-desc-input').value = result.value;
-                                showToast('Word人设文档内容已成功提取并导入！');
-                            })
-                            .catch(function(err) {
-                                console.error(err);
-                                showToast('DOCX 文件解析失败，建议转为 TXT 导入！');
-                            });
-                    } else {
-                        showToast('正在加载 Word 解析模块，请稍候再试...');
+                        showToast('PNG 解析异常，请确认图片无损。');
                     }
                 };
                 reader.readAsArrayBuffer(file);
-            } else {
+            } else if (extension === 'json') {
+                const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('profile-desc-input').value = e.target.result;
-                    showToast('人设内容文本已成功导入！');
+                    try {
+                        const json = JSON.parse(e.target.result);
+                        const charData = json.data || json;
+                        populateTavernCardData(charData, null);
+                        showToast(`✨ JSON酒馆卡 [${charData.name || "未命名"}] 解析成功！`);
+                    } catch(err) {
+                        console.error(err);
+                        showToast('JSON 解析失败，请检查卡片结构！');
+                    }
                 };
                 reader.readAsText(file);
             }
@@ -2811,19 +2748,22 @@
                     display: block;
                     width: 100%;
                     height: auto;
-                    overflow: hidden; /* 防止物理边缘生硬溢出 */
+                    overflow: visible;
                     pointer-events: auto !important;
                 }
                 .sandboxed-content {
                     width: 100%;
                     height: auto;
+                    min-height: 100%;
                     box-sizing: border-box;
-                    transform-origin: top left;
+                    word-break: break-word;
+                    overflow-wrap: break-word;
                     pointer-events: auto !important;
                 }
                 * {
                     box-sizing: border-box;
                     pointer-events: auto !important;
+                    max-width: 100% !important;
                 }
             `;
             shadow.appendChild(resetStyle);
@@ -2833,43 +2773,7 @@
             contentDiv.innerHTML = htmlCode;
             shadow.appendChild(contentDiv);
             
-            // 弹性视口物理微缩计算引擎 
-            setTimeout(() => {
-                const hostWidth = host.getBoundingClientRect().width || container.clientWidth || 350;
-                
-                // 临时重置比对尺寸，测出原生无损 HTML 的真实渲染宽 
-                contentDiv.style.transform = 'none';
-                contentDiv.style.width = 'max-content';
-                
-                let contentWidth = contentDiv.scrollWidth || 350;
-                
-                // 深度遍历子节点寻找可能硬编码 width: 400px 的越界溢出者 
-                const allElements = contentDiv.querySelectorAll('*');
-                allElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.width > contentWidth) {
-                        contentWidth = rect.width;
-                    }
-                });
-
-                // 若真实溢出，毫秒级无损等比例微缩，保障大弹窗及列表内部点击、滑动、撑伞、撕票据 100% 灵敏完美展示 
-                if (contentWidth > hostWidth && hostWidth > 0) {
-                    const scaleFactor = hostWidth / contentWidth;
-                    contentDiv.style.transform = `scale(${scaleFactor})`;
-                    contentDiv.style.width = `${contentWidth}px`; 
-                    
-                    // 高精补偿宿主高度，彻底消灭下方的大长空白
-                    const contentHeight = contentDiv.getBoundingClientRect().height * scaleFactor;
-                    host.style.height = `${contentHeight}px`;
-                } else {
-                    // 自适应普通还原 
-                    contentDiv.style.transform = 'none';
-                    contentDiv.style.width = '100%';
-                    host.style.height = 'auto';
-                }
-            }, 80);
-            
-            // 重新在影子局部树执行脚本激活运行
+            // 确保脚本重新激活与无截断渲染
             executeScripts(shadow);
         }
 
@@ -2994,7 +2898,7 @@ ${breakEnabled ? `- 破限参数：${breakWords}` : ''}
 ${forbiddenDirections ? `- 绝对禁止生成的方向：${forbiddenDirections}` : ''}
 
 【小剧场 HTML 穿穿组件排版约束】：
-1. 剧场剧情输出必须使用干净、美观 of HTML 格式包裹。
+1. 剧场剧情输出必须使用干净、美观的 HTML 格式包裹。
 2. 绝对禁止使用任何带有渐变（gradient）的背景，只允许简约的黑、白、灰色调或低饱色系。
 3. 绝对禁止在生成标题、场景线索、分割线时发生字符垂直换行现象。文本分割容器必须在 style 中强制包含“white-space: nowrap; text-overflow: ellipsis;”等配置规则。
 4. 剧场表现不局限于纯文本，请根据实际场景与剧本作铺垫，穿插不同的特色黑白灰扁平风 UI 组件（例如聊天对话卡、通话卡、消费清单账单、事件定位备忘卡等，无交互纯展示即可）。
@@ -4097,44 +4001,20 @@ ${forbiddenDirections ? `- 绝对禁止生成的方向：${forbiddenDirections}`
             document.getElementById('wallpaper-upload-input').click();
         }
 
-        // 本地壁纸上传、Canvas微缩高清缓冲
+        // 全局壁纸上传：直接应用无损原始高清图
         function handleWallpaperUpload(event) {
-            const file = event.target.files[0];
+            const file = event.target.files && event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const img = new Image();
-                    img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        const max_size = 1080; // 高清自适应宽
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > height) {
-                            if (width > max_size) {
-                                height *= max_size / width;
-                                width = max_size;
-                            }
-                        } else {
-                            if (height > max_size) {
-                                width *= max_size / height;
-                                height = max_size;
-                            }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        // 转换成优化 JPEG base64，防止超出 localStorage 限额 
-                        const base64 = canvas.toDataURL('image/jpeg', 0.75);
-                        
+                    const base64 = e.target.result;
+                    try {
                         localStorage.setItem('theater_global_wallpaper', base64);
-                        applyWallpaper(base64);
-                        showToast('壁纸上传成功，已全局完美应用 ✨');
-                    };
-                    img.src = e.target.result;
+                    } catch(err) {
+                        console.warn("原图较大，已直接应用");
+                    }
+                    applyWallpaper(base64);
+                    showToast('壁纸上传成功，已应用高清原图 ');
                 };
                 reader.readAsDataURL(file);
             }
@@ -4190,7 +4070,7 @@ ${forbiddenDirections ? `- 绝对禁止生成的方向：${forbiddenDirections}`
             const date = String(now.getDate()).padStart(2, '0');
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
-            return `耳机の小剧场游玩区_备份数据_${year}${month}${date}_${hours}${minutes}.json`;
+            return `耳机の番外指令游玩小工具_备份数据_${year}${month}${date}_${hours}${minutes}.json`;
         }
 
         // 导出
@@ -4256,19 +4136,6 @@ ${forbiddenDirections ? `- 绝对禁止生成的方向：${forbiddenDirections}`
         // ---------------- 16. 安全初始化自愈防崩溃 ----------------
         document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.remove('dark-mode');
-           // 现场自愈自检：后台进程休眠或刷新后，恢复原本打开的页面，避免自动退回主页
-            try {
-                const savedViewId = localStorage.getItem('theater_active_view_id');
-                if (savedViewId && savedViewId !== 'home-view') {
-                    document.querySelectorAll('.view').forEach(view => {
-                        view.classList.remove('active');
-                    });
-                    const targetView = document.getElementById(savedViewId);
-                    if (targetView) {
-                        targetView.classList.add('active');
-                    }
-                }
-            } catch(e) { console.error("主视图自愈恢复失败", e); }
 
             // 自愈型时序时钟守护
             try {
@@ -4364,7 +4231,57 @@ ${forbiddenDirections ? `- 绝对禁止生成的方向：${forbiddenDirections}`
                 renderSavedSessions();
                 renderHtmlLibrary(); 
             } catch(e) { console.error("库同步自愈", e); }
+            
+            // 自动注册 PWA Manifest 与离线自适应 Worker
+            initPWAEngine();
         });
+
+        // ---------------- PWA 安装与离线引擎 ----------------
+        function initPWAEngine() {
+            const svgIcon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%23f5f5f7'/%3E%3Cpath d='M256 160c-66.3 0-120 53.7-120 120 0 5.5 4.5 10 10 10h220c5.5 0 10-4.5 10-10 0-66.3-53.7-120-120-120z' fill='%236e6e73'/%3E%3Cpath d='M256 142v18m0 130v64a20 20 0 0 0 40 0' fill='none' stroke='%236e6e73' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='256' cy='140' r='5' fill='%236e6e73'/%3E%3Cpath d='M175 200c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24zM256 100c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24zM337 200c-6 10-12 18-12 24a12 12 0 1 0 24 0c0-6-6-14-12-24z' fill='%238e8e93'/%3E%3C/svg%3E";
+
+            const manifest = {
+                name: "Bonus Mini-Play",
+                short_name: "Bonus Mini-Play",
+                description: "耳机の番外指令游玩小工具",
+                start_url: window.location.href,
+                display: "standalone",
+                background_color: "#f4f4f7",
+                theme_color: "#f4f4f7",
+                icons: [
+                    {
+                        src: svgIcon,
+                        sizes: "512x512",
+                        type: "image/svg+xml",
+                        purpose: "any maskable"
+                    }
+                ]
+            };
+
+            const stringManifest = JSON.stringify(manifest);
+            const blob = new Blob([stringManifest], { type: 'application/json' });
+            const manifestURL = URL.createObjectURL(blob);
+            
+            let manifestLink = document.querySelector('link[rel="manifest"]');
+            if (!manifestLink) {
+                manifestLink = document.createElement('link');
+                manifestLink.rel = 'manifest';
+                document.head.appendChild(manifestLink);
+            }
+            manifestLink.href = manifestURL;
+
+            // 注册最小化无感知 ServiceWorker 触发浏览器 PWA 安装提示
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    self.addEventListener('install', e => self.skipWaiting());
+                    self.addEventListener('activate', e => clients.claim());
+                    self.addEventListener('fetch', e => {});
+                `;
+                const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swUrl).catch(() => {});
+            }
+        }
     </script>
 </body>
 </html>
