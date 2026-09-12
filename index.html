@@ -909,6 +909,40 @@
             white-space: pre-wrap;
             line-height: 1.5;
         }
+
+        /* 爆裂夸夸漂浮字动画 */
+        .burst-text {
+            position: fixed;
+            pointer-events: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 4px 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px var(--shadow);
+            z-index: 2000;
+            animation: burstFly 1.1s cubic-bezier(0.15, 0.85, 0.35, 1.2) forwards;
+            white-space: nowrap;
+        }
+
+        @keyframes burstFly {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 0) scale(0.6);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(calc(-50% + var(--dx)), calc(-30px + var(--dy))) scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--dx) * 1.5), calc(-90px + var(--dy))) scale(0.9);
+            }
+        }
     </style>
 </head>
 <body>
@@ -961,15 +995,23 @@
             <!-- 主页面 -->
             <div id="home-view" class="view active">
                 <header class="app-header">
-                    <div class="title-row">
-                        <h1>Bonus Mini-Play</h1>
-                        <button class="theme-toggle" onclick="toggleTheme()" title="切换日/夜间模式">
-                            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <div class="title-row" style="justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <h1>Bonus Mini-Play</h1>
+                            <button class="theme-toggle" onclick="toggleTheme()" title="切换日/夜间模式">
+                                <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- 右上角常驻查看合作鸣谢与夸夸弹窗矢量按钮 -->
+                        <button class="theme-toggle" id="collab-badge-btn" onclick="openCreditModal()" title="合作鸣谢" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 10px; background: var(--input-bg); border: 1px solid var(--glass-border);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 17px; height: 17px;">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                             </svg>
                         </button>
                     </div>
-                    <p>theater play zone</p>
+                    <p style="text-transform: none; letter-spacing: 0.2px; font-size: 11.5px;">番外小工具by耳机&请叫我随安安安</p>
                 </header>
 
                 <div class="list-stack">
@@ -1620,6 +1662,43 @@
         </div>
 
         <div id="toast" class="toast">提示信息</div>
+    </div>
+
+    <!-- 灰茶色高级感合作致谢与夸夸弹窗 overlay -->
+    <div id="credit-collab-modal" class="modal-overlay">
+        <div class="modal-content glass-panel" style="max-width: 380px; text-align: center; padding: 26px 22px;">
+            <!-- 矢量装饰徽标 -->
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--input-bg); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px auto; color: var(--text-primary);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+            </div>
+
+            <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.3px;">特别致谢与共创声明</h3>
+
+            <div style="font-size: 12.5px; color: var(--text-primary); line-height: 1.8; text-align: center; margin-bottom: 20px; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 14px;">
+                <div style="font-weight: 600; margin-bottom: 4px;">该番外指令小工具</div>
+                <div>由 <span style="font-weight: 600;">@耳机</span> 与 <span style="font-weight: 600;">@请叫我随安安安</span> 合作而成</div>
+                <div style="margin-top: 6px; color: var(--text-secondary); font-size: 12px;">本小工具番外指令生成模板话术均是<br><span style="color: var(--text-primary); font-weight: 500;">@请叫我随安安安</span> 提供</div>
+                <div style="margin-top: 6px; color: var(--text-secondary); font-size: 12px;">内置小番外也由 <span style="color: var(--text-primary); font-weight: 500;">@请叫我随安安安</span> 提供而来</div>
+                <div style="margin-top: 8px; font-weight: 500;">请多多支持 <span style="font-weight: 600;">@请叫我随安安安</span> 老师的番外指令呀</div>
+                <div style="margin-top: 8px; font-size: 11.5px; color: var(--text-secondary); font-style: italic;">耳机os（随安安安其实是我女神）</div>
+            </div>
+
+            <!-- 互动按钮区域 -->
+            <div id="credit-action-box" style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="mono-btn secondary" id="praise-btn" onclick="handlePraiseClick(event)" style="border-style: dashed; position: relative;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                    </svg>
+                    <span id="praise-btn-text">夸夸随安安安 (0/3)</span>
+                </button>
+
+                <button class="mono-btn" id="credit-confirm-btn" onclick="dismissCreditModal()" style="display: none;">
+                    <span>已阅读完毕</span>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- 剧场类型选择弹窗 overlay (高透亮柔光) -->
@@ -4247,9 +4326,83 @@ ${forbiddenDirections ? `- 绝对禁止生成的方向：${forbiddenDirections}`
             }
         }
 
+        // ---------------- 合作致谢与夸夸交互系统 ----------------
+        let praiseCount = 0;
+        const praiseQuotes = [
+            "随安安安牛逼",
+            "随安安安我们喜欢你",
+            "随安安安是我女神",
+            "随安安安女神",
+            "好喜欢这个随安安安",
+            "随安安安你写的指令咋这么好玩",
+            "玩一辈子这个随安安安的番外指令"
+        ];
+
+        function handlePraiseClick(event) {
+            praiseCount++;
+            
+            // 爆出漂浮文字特效
+            const randomQuote = praiseQuotes[Math.floor(Math.random() * praiseQuotes.length)];
+            const burst = document.createElement('div');
+            burst.className = 'burst-text';
+            burst.innerText = randomQuote;
+            
+            // 计算爆裂位置与偏移
+            const rect = event.currentTarget.getBoundingClientRect();
+            const posX = rect.left + rect.width / 2;
+            const posY = rect.top;
+            const dx = (Math.random() - 0.5) * 120 + 'px';
+            const dy = (Math.random() * -40) + 'px';
+            
+            burst.style.left = `${posX}px`;
+            burst.style.top = `${posY}px`;
+            burst.style.setProperty('--dx', dx);
+            burst.style.setProperty('--dy', dy);
+            
+            document.body.appendChild(burst);
+            setTimeout(() => {
+                if (burst.parentNode) burst.parentNode.removeChild(burst);
+            }, 1100);
+
+            const praiseBtnText = document.getElementById('praise-btn-text');
+            const confirmBtn = document.getElementById('credit-confirm-btn');
+
+            if (praiseCount < 3) {
+                praiseBtnText.innerText = `夸夸随安安安 (${praiseCount}/3)`;
+            } else {
+                praiseBtnText.innerText = `已夸完随安安安 ✨`;
+                confirmBtn.style.display = 'flex';
+            }
+        }
+
+        function openCreditModal() {
+            praiseCount = 0;
+            const praiseBtnText = document.getElementById('praise-btn-text');
+            const confirmBtn = document.getElementById('credit-confirm-btn');
+            if (praiseBtnText) praiseBtnText.innerText = '夸夸随安安安 (0/3)';
+            if (confirmBtn) confirmBtn.style.display = 'none';
+            document.getElementById('credit-collab-modal').classList.add('active');
+        }
+
+        function dismissCreditModal() {
+            localStorage.setItem('has_seen_credit_collab_v130', 'true');
+            document.getElementById('credit-collab-modal').classList.remove('active');
+            showToast('已确认，随时可点击右上角图标重新查看');
+        }
+
         // ---------------- 16. 安全初始化自愈防崩溃 ----------------
         document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.remove('dark-mode');
+
+            // 首次打开自动弹出合作致谢弹窗
+            try {
+                const hasSeen = localStorage.getItem('has_seen_credit_collab_v130');
+                if (!hasSeen) {
+                    setTimeout(() => {
+                        openCreditModal();
+                    }, 400);
+                }
+            } catch(e) {}
 
             // 自愈型时序时钟守护
             try {
